@@ -1,24 +1,27 @@
 class BasePage {
-    constructor(page) {
-        this.page = page;
-    }
+  //Thsi class rovides shared utility methods for all Page Object classes.
+  constructor(page) {
+    this.page = page;
+  }
+  // Navigates to an endpoint route defined by env variable name
+  async gotoRoute(envRouteKey) {
+    const route = process.env[envRouteKey];
+    await this.page.goto(process.env.BASE_URL + route);
+  }
 
-    async goto(url = '') {
-        await this.page.goto(process.env.BASE_URL + url);
-    }
+  async waitForVisible(locator, timeout = 3000) {
+    await locator.waitFor({ state: "visible", timeout });
+  }
 
-    async waitForVisible(locator, timeout = 3000) {
-        await locator.waitFor({ state: 'visible', timeout });
-    }
+  async click(locator) {
+    await locator.click();
+  }
 
-    async click(locator) {
-        await locator.click();
-    }
-
-    async fill(locator, value) {
-        await locator.fill(value);
-    }
-   /*async generateRandomEmail(baseEmail: string): string {
+  async fill(locator, value) {
+    await locator.fill(value);
+  }
+  // Re-generate random email and
+  /*async generateRandomEmail(baseEmail: string): string {
         const part = baseEmail.split("@");
         const name = part[0];
         const domain = part[1];
