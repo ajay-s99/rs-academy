@@ -3,10 +3,12 @@ const { test, expect } = require("@playwright/test");
 const { RegistrationPage } = require("../pages/RegistrationPage");
 const data = require("../data/registrationTestData");
 const tags = require("../tests/helper/tag_helper");
+const { generateUniqueEmail } = require('../utils/emailGenerator');
 
 test(`Registration positive flow test ${tags.TAG_SMOKE}`, async ({ page }) => {
   const regPage = new RegistrationPage(page);
-  await regPage.register(data.validUser);
+  const user={...data.validUser, email:generateUniqueEmail()};  //Collect valid users details and generate unique email on each test run.
+  await regPage.register(user);
   await regPage.clickOnLoginCTA();
   await expect(page).toHaveURL(process.env.BASE_URL + process.env.LOGIN_ROUTE);
 });

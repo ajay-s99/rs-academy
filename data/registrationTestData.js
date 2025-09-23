@@ -1,9 +1,10 @@
+// Centralized test data module - keeps test logic separate from data.
 module.exports = {
     validUser: {
         firstName: "Ajay",
-        lastName: "Sutar",
-        email: "ajay@yopmail.com",
-        phone: "9876543210",
+        lastName: "Smith",
+        email: "ajg78y@yopmail.com",
+        phone: "9876556765",
         profession: "Engineer",
         gender: "Male",
         password: "Test@123",
@@ -20,8 +21,5 @@ module.exports = {
         confirmPassword: "a",
         checkError: ["*Enter Valid Email", "*Phone Number must be 10 digit"]
     },
-    redirectedUrl: {
-        login: "/.*login/",
-        register: "/.*register/"
-    }
+   
 };
